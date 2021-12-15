@@ -1026,7 +1026,7 @@ The special case is when you compare a primitive with an object that evaluates t
 
 Here the `==` operator is checking the values of the two objects and returning `true`, but the `===` is seeing that they're not the same type and returning `false`. Which one is correct? That really depends on what you're trying to compare. My advice is to bypass the question entirely and just don't use the `String` constructor to create string objects from string literals.
 
-`var1 === var2`
+`char1 === char2`
 
 When using `===` for JavaScript equality testing, everything is as is.
 Nothing gets converted before being evaluated.
@@ -1359,14 +1359,14 @@ Comparing two JavaScript objects **always** returns **false**.
 Javascript String is immutable, which means once a String object is assigned to String reference the object value cannot be changed. However, we can still assign a new object to a String reference
 
 ````javascript
-let myVar = "Hello World";
+let myStr = "Hello World";
 myVar.toUpperCase();
 ````
 
 One may think after the first line the *myVar* will become “HELLO WORLD”, but it still equals to “Hello World”. The method will return a new String object it will not change the existing String reference. So we have to assign it to a new variable to get the desired value.
 
 ````javascript
-let myVarUpperCase = myVar.toUpperCase();
+let myStrUpperCase = myStr.toUpperCase();
 ````
 
 It may seem that once a String reference is assigned to a String object it cannot be reused as we can't change the value but we can assign existing String reference a new String object altogether.
@@ -1381,11 +1381,119 @@ str = str.toUpperCase();
 *Note*: We also cannot assign a new character to an index in String by square bracket notation. As Strings are immutable, by doing that we will be updating the content of String reference which cannot be possible in case of immutability.
 
 ````javascript
-var myVar = "Hello";
+let myStr = "Hello";
 myVar[0] = "i";//still myVar remains same
 ````
 
 String object has many methods which deal with string characters and all of them returns a new String object instead of modifying the String object on which they are called.
+
+## JavaScript Arrays
+
+An array is a special variable, which can hold more than one value:
+
+````javascript
+const starterPokemon = ["Charmander", "Bulbasaur", "Squirtle"];
+````
+
+If you have a list of items (a list of Pokémon names, for example), storing the Pokémon in single variables could look like this
+
+````javascript
+let starterPokemon1 = "Charmander";
+let starterPokemon2 = "Bulbasaur";
+let starterPokemon3 = "Squirtle";
+````
+
+However, what if you want to loop through the Pokémon and find a specific one? And what if you had not 3 Pokémon, but 150?
+
+The solution is an array!
+
+An array can hold many values under a single name, and you can access the values by referring to an index number.
+
+Using an array literal is the easiest way to create a JavaScript Array.
+
+Syntax:
+
+````javascript
+const array_name = [item1, item2, ...];    
+````
+
+It is a common practice to declare arrays with the const keyword.
+
+Spaces and line breaks are not important. A declaration can span multiple lines:
+
+````javascript
+const starterPokemon = [
+    "Charmander", 
+    "Bulbasaur", 
+    "Squirtle"
+];
+````
+
+You can also create an array, and then provide the elements:
+
+````javascript
+const starterPokemon = [];
+starterPokemon1 = "Charmander"; 
+starterPokemon2 = "Bulbasaur"; 
+starterPokemon3 = "Squirtle";
+````
+
+The following example also creates an Array, and assigns values to it:
+
+````javascript
+const starterPokemon = new Array("Charmander", "Bulbasaur", "Squirtle");
+````
+
+The two examples above do exactly the same.
+
+There is no need to use `new Array()`.
+
+For simplicity, readability and execution speed, use the array literal method.
+
+You access an array element by referring to the **index number**:
+
+````javascript
+const starterPokemon = ["Charmander", "Bulbasaur", "Squirtle"];
+let individualStarterPokemon = starterPokemon[0];
+````
+
+**Note:** Array indexes start with 0.
+
+[0] is the first element. [1] is the second element.
+
+This statement changes the value of the first element in `starterPokemon`:
+
+````javascript
+starterPokemon[0] = "Pikachu";
+````
+
+Arrays are a special type of objects. The `typeof` operator in JavaScript returns "object" for arrays.
+
+But, JavaScript arrays are best described as arrays.
+
+Arrays use **numbers** to access its "elements". In this example, `starterPokemon[0]` returns Charmander:
+
+````javascript
+const starterPokemon = ["Charmander", "Bulbasaur", "Squirtle"];
+````
+
+Warning !
+
+Array elements can be deleted using the JavaScript operator `delete`.
+
+Using `delete` leaves `undefined` holes in the array.
+
+Use pop() or shift() instead.
+
+By default, the `sort()` function sorts values as **strings**.
+
+This works well for strings ("Apple" comes before "Banana").
+
+However, if numbers are sorted as strings, "25" is bigger than "100", because "2" is bigger than "1".
+
+Because of this, the `sort()` method will produce incorrect result when sorting numbers.
+
+
 
 ## JavaScript Array Methods
 
@@ -1429,3 +1537,1092 @@ String object has many methods which deal with string characters and all of them
 | [constructor](https://www.w3schools.com/jsref/jsref_constructor_array.asp) | Returns the function that created the Array object's prototype |
 | [length](https://www.w3schools.com/jsref/jsref_length_array.asp) | Sets or returns the number of elements in an array           |
 | [prototype](https://www.w3schools.com/jsref/jsref_prototype_array.asp) | Allows you to add properties and methods to an Array object  |
+
+The Difference Between Arrays and Objects
+
+In JavaScript, **arrays** use **numbered indexes**. 
+
+In JavaScript, **objects** use **named indexes**.
+
+Arrays are a special kind of objects, with numbered indexes.
+
+When to Use Arrays. When to use Objects.
+
+- JavaScript does not support associative arrays.
+- You should use **objects** when you want the element names to be **strings (text)**.
+- You should use **arrays** when you want the element names to be **numbers**.
+
+Loops can execute a block of code a number of times.
+
+## JavaScript Loops
+
+Loops are handy, if you want to run the same code over and over again, each time with a different value.
+
+````javascript
+//instead of writing
+text += starterPokemon[0] + "<br>";
+text += starterPokemon[1] + "<br>";
+text += starterPokemon[2] + "<br>";
+text += starterPokemon[3] + "<br>";
+text += starterPokemon[4] + "<br>";
+text += starterPokemon[5] + "<br>";
+//You can write:
+for (let i = 0; i < starterPokemon.length; i++) {
+  text += starterPokemon[i] + "<br>";
+}
+````
+
+Different Kinds of Loops
+
+JavaScript supports different kinds of loops:
+
+- `for` - loops through a block of code a number of times
+- `for/in` - loops through the properties of an object
+- `for/of` - loops through the values of an iterable object
+- `while` - loops through a block of code while a specified condition is true
+- `do/while` - also loops through a block of code while a specified condition is true
+
+The For Loop
+
+The `for` loop has the following syntax:
+
+````javascript
+for (*statement 1*; *statement 2*; *statement 3*) {
+ // *code block to be executed*
+}
+````
+
+
+
+**Statement 1** is executed (one time) before the execution of the code block.
+
+**Statement 2** defines the condition for executing the code block.
+
+**Statement 3** is executed (every time) after the code block has been executed.
+
+````javascript
+for (let i = 0; i < 5; i++) {
+  text += "The number is " + i + "<br>";
+}
+````
+
+From the example above, you can read:
+
+Statement 1 sets a variable before the loop starts (let i = 0).
+
+Statement 2 defines the condition for the loop to run (i must be less than 5).
+
+Statement 3 increases a value (i++) each time the code block in the loop has been executed.
+
+**<u>Statement 1</u>**
+
+Normally you will use statement 1 to initialize the variable used in the loop (let i = 0).
+
+This is not always the case, JavaScript doesn't care. Statement 1 is optional.
+
+You can initiate many values in statement 1 (separated by comma):
+
+````javascript
+for (let i = 0, len = starterPokemon.length, text = ""; i < len; i++) {
+  text += starterPokemon[i] + "<br>";
+}
+````
+
+And you can omit statement 1 (like when your values are set before the loop starts)
+
+````javascript
+let i = 2;
+let len = starterPokemon.length;
+let text = "";
+for (; i < len; i++) {
+  text += starterPokemon[i] + "<br>";
+}
+````
+
+**<u>Statement 2</u>**
+
+Often statement 2 is used to evaluate the condition of the initial variable.
+
+This is not always the case, JavaScript doesn't care. Statement 2 is also optional.
+
+If statement 2 returns true, the loop will start over again, if it returns false, the loop will end.
+
+If you omit statement 2, you must provide a **break** inside the loop. Otherwise the loop will never end. This will crash your browser. Read about breaks in a later chapter of this tutorial.
+
+**<u>Statement 3</u>**
+
+Often statement 3 increments the value of the initial variable.
+
+This is not always the case, JavaScript doesn't care, and statement 3 is optional.
+
+Statement 3 can do anything like negative increment (i--), positive increment (i = i + 15), or anything else.
+
+Statement 3 can also be omitted (like when you increment your values inside the loop):
+
+````javascript
+let i = 0;
+let len = starterPokemon.length;
+let text = "";
+for (; i < len; ) {
+  text += starterPokemon[i] + "<br>";
+  i++;
+}
+````
+
+Loop Scope
+
+Using `var` in a loop:
+
+````javascript
+var i = 5;
+
+for (var i = 0; i < 10; i++) {
+  // some code
+}
+
+// Here i is 10
+````
+
+Using `let` in a loop:
+
+````javascript
+let i = 5;
+
+for (let i = 0; i < 10; i++) {
+  // some code
+}
+
+// Here i is 5
+````
+
+In the first example, using `var`, the variable declared in the loop redeclares the variable outside the loop.
+
+In the second example, using `let`, the variable declared in the loop does not redeclare the variable outside the loop.
+
+When `let` is used to declare the i variable in a loop, the i variable will only be visible within the loop.
+
+The For In Loop
+
+The JavaScript `for in` statement loops through the properties of an Object:
+
+````javascript
+for (key in object) {
+  // code block to be executed
+}
+````
+
+- The **for in** loop iterates over a **person** object
+- Each iteration returns a **key** (x)
+- The key is used to access the **value** of the key
+- The value of the key is **person[x]**
+
+````javascript
+const person = {fname:"John", lname:"Doe", age:25};
+
+let text = "";
+for (let x in person) {
+  text += person[x];
+}
+````
+
+For In Over Arrays
+
+The JavaScript `for in` statement can also loop over the properties of an Array:
+
+````javascript
+for (variable in array) {
+  code
+}
+````
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+
+let txt = "";
+for (let x in numbers) {
+  txt += numbers[x];
+}
+````
+
+Do not use **for in** over an Array if the index **order** is important.
+
+The index order is implementation-dependent, and array values may not be accessed in the order you expect.
+
+It is better to use a **for** loop, a **for of** loop, or **Array.forEach()** when the order is important.
+
+The `forEach()` method calls a function (a callback function) once for each array element.
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+
+let txt = "";
+numbers.forEach(myFunction);
+
+function myFunction(value, index, array) {
+  txt += value;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+The JavaScript `for of` statement loops through the values of an iterable object.
+
+It lets you loop over iterable data structures such as Arrays, Strings, Maps, NodeLists, and more:
+
+````javascript
+for (variable of iterable) {
+  // code block to be executed
+}
+````
+
+**variable** - For every iteration the value of the next property is assigned to the variable. *Variable* can be declared with `const`, `let`, or `var`.
+
+**iterable** - An object that has iterable properties.
+
+**For/of** is not supported in Internet Explorer.
+
+Looping over an Array:
+
+````javascript
+const cars = ["BMW", "Volvo", "Mini"];
+
+let text = "";
+for (let x of cars) {
+  text += x;
+}
+````
+
+Looping over a string
+
+````javascript
+let language = "JavaScript";
+
+let text = "";
+for (let x of language) {
+text += x;
+}
+````
+
+The `while` loop loops through a block of code as long as a specified condition is true.
+
+We can use the `while` loop to create any type of iteration we wish, including anything that we have previously done with a `for` loop. 
+
+````javascript
+while (condition) {
+  // code block to be executed
+}
+````
+
+````javascript
+//for loop
+for (let i = 0; i < 51; i++) {
+   console.log(i);
+}
+//while loop
+let i = 0;
+
+while (i < 51) {
+   console.log(i);
+   i++;
+}
+````
+
+If you forget to increase the variable used in the condition, the loop will never end. This will crash your browser.
+
+The `do while` loop is a variant of the while loop. This loop will execute the code block once, before checking if the condition is true, then it will repeat the loop as long as the condition is true.
+
+````javascript
+do {
+  // code block to be executed
+}
+while (condition);
+````
+
+The example below uses a `do while` loop. The loop will always be executed at least once, even if the condition is false, because the code block is executed before the condition is tested
+
+````javascript
+do {
+  text += "The number is " + i;
+  i++;
+}
+while (i < 10);
+````
+
+Do not forget to increase the variable used in the condition, otherwise the loop will never end!
+
+## JavaScript Array Iteration
+
+Array iteration methods operate on every array item.
+
+The Array forEach() Method
+
+The `forEach()` method calls a function (a callback function) once for each array element.
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+The example above uses only the value parameter. The example can be rewritten to:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let txt = "";
+numbers.forEach(myFunction);
+
+function myFunction(value) {
+ txt += value + "<br>";
+}
+````
+
+The Array map() Method
+
+The `map()` method creates a new array by performing a function on each array element.
+
+The `map()` method does not execute the function for array elements without values.
+
+The `map()` method does not change the original array.
+
+This example multiplies each array value by 2:
+
+````javascript
+const numbers1 = [45, 4, 9, 16, 25];
+const numbers2 = numbers1.map(myFunction);
+
+function myFunction(value, index, array) {
+ return value * 2;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+When a callback function uses only the value parameter, the index and array parameters can be omitted:
+
+````javascript
+const numbers1 = [45, 4, 9, 16, 25];
+const numbers2 = numbers1.map(myFunction);
+
+function myFunction(value) {
+ return value * 2;
+}
+````
+
+The Array filter() Method
+
+The `filter()` method creates a new array with array elements that passes a test.
+
+This example creates a new array from elements with a value larger than 18:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+const over18 = numbers.filter(myFunction);
+
+function myFunction(value, index, array) {
+ return value > 18;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+In the example above, the callback function does not use the index and array parameters, so they can be omitted:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+const over18 = numbers.filter(myFunction);
+
+function myFunction(value) {
+ return value > 18;
+}
+````
+
+The Array reduce() Method
+
+The `reduce()` method runs a function on each array element to produce (reduce it to) a single value.
+
+The `reduce()` method works from left-to-right in the array. See also `reduceRight()`.
+
+The `reduce()` method does not reduce the original array.
+
+This example finds the sum of all numbers in an array:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction);
+
+function myFunction(total, value, index, array) {
+ return total + value;
+}
+````
+
+Note that the function takes 4 arguments:
+
+- The total (the initial value / previously returned value)
+- The item value
+- The item index
+- The array itself
+
+The example above does not use the index and array parameters. It can be rewritten to:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction);
+
+function myFunction(total, value) {
+ return total + value;
+}
+````
+
+The `reduce()` method can accept an initial value:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers.reduce(myFunction, 100);
+
+function myFunction(total, value) {
+ return total + value;
+}
+````
+
+The Array reduceRight() Method
+
+The `reduceRight()` method runs a function on each array element to produce (reduce it to) a single value.
+
+The `reduceRight()` works from right-to-left in the array. See also `reduce()`.
+
+The `reduceRight()` method does not reduce the original array.
+
+This example finds the sum of all numbers in an array:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers1.reduceRight(myFunction);
+
+function myFunction(total, value, index, array) {
+ return total + value;
+}
+````
+
+Note that the function takes 4 arguments:
+
+- The total (the initial value / previously returned value)
+- The item value
+- The item index
+- The array itself
+
+The example above does not use the index and array parameters. It can be rewritten to:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let sum = numbers1.reduceRight(myFunction);
+
+function myFunction(total, value) {
+ return total + value;
+}
+````
+
+The Array every() Method
+
+The `every()` method check if all array values pass a test.
+
+This example check if all array values are larger than 18:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let allOver18 = numbers.every(myFunction);
+
+function myFunction(value, index, array) {
+ return value > 18;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+When a callback function uses the first parameter only (value), the other parameters can be omitted:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let allOver18 = numbers.every(myFunction);
+
+function myFunction(value) {
+ return value > 18;
+}
+````
+
+The Array some() Method
+
+The `some()` method check if some array values pass a test.
+
+This example check if some array values are larger than 18:
+
+````javascript
+const numbers = [45, 4, 9, 16, 25];
+let someOver18 = numbers.some(myFunction);
+
+function myFunction(value, index, array) {
+ return value > 18;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+The Array indexOf() Method
+
+The `indexOf()` method searches an array for an element value and returns its position.
+
+**Note:** The first item has position 0, the second item has position 1, and so on.
+
+Search an array for the item "Apple":
+
+````javascript
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.indexOf("Apple") + 1;
+````
+
+*array*.indexOf(*item*, *start*)
+
+| *item*  | Required. The item to search for.                            |
+| ------- | ------------------------------------------------------------ |
+| *start* | Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the end. |
+
+`Array.indexOf()` returns -1 if the item is not found.
+
+If the item is present more than once, it returns the position of the first occurrence.
+
+The Array lastIndexOf() Method
+
+`Array.lastIndexOf()` is the same as `Array.indexOf()`, but returns the position of the last occurrence of the specified element.
+
+Search an array for the item "Apple":
+
+````javascript
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+let position = fruits.lastIndexOf("Apple") + 1;
+````
+
+*array*.lastIndexOf(*item*, *start*)
+
+| *item*  | Required. The item to search for                             |
+| ------- | ------------------------------------------------------------ |
+| *start* | Optional. Where to start the search. Negative values will start at the given position counting from the end, and search to the beginning |
+
+------
+
+The Array includes() Method
+
+ECMAScript 2016 introduced `Array.includes()` to arrays. This allows us to check if an element is present in an array (including NaN, unlike indexOf).
+
+````javascript
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+fruits.includes("Mango"); // is true
+````
+
+*array*.includes(*search-item*)
+
+Array.includes() allows to check for NaN values. Unlike Array.indexOf().
+
+The first browser versions with full support are:
+
+The Array find() Method
+
+The `find()` method returns the value of the first array element that passes a test function.
+
+This example finds (returns the value of) the first element that is larger than 18:
+
+````javascript
+const numbers = [4, 9, 16, 25, 29];
+let first = numbers.find(myFunction);
+
+function myFunction(value, index, array) {
+ return value > 18;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+The Array findIndex() Method
+
+The `findIndex()` method returns the index of the first array element that passes a test function.
+
+This example finds the index of the first element that is larger than 18:
+
+````javascript
+const numbers = [4, 9, 16, 25, 29];
+let first = numbers.findIndex(myFunction);
+
+function myFunction(value, index, array) {
+ return value > 18;
+}
+````
+
+Note that the function takes 3 arguments:
+
+- The item value
+- The item index
+- The array itself
+
+The Array.from() Method
+
+The `Array.from()` method returns an Array object from any object with a length property or any iterable object.
+
+Create an Array from a String:
+
+````javascript
+Array.from("ABCDEFG")  // Returns [A,B,C,D,E,F,G]
+````
+
+The Array Keys() Method
+
+The `Array.keys()` method returns an Array Iterator object with the keys of an array.
+
+Create an Array Iterator object, containing the keys of the array:
+
+````javascript
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const keys = fruits.keys();
+
+for (let x of keys) {
+ text += x + "<br>";
+}
+````
+
+## JavaScript Functions
+
+A JavaScript function is a block of code designed to perform a particular task.
+
+A JavaScript function is executed when "something" invokes it (calls it).
+
+````javascript
+function myFunction(p1, p2) {
+  return p1 * p2;   // The function returns the product of p1 and p2
+}
+````
+
+A JavaScript function is defined with the `function` keyword, followed by a **name**, followed by parentheses **()**.
+
+Function names can contain letters, digits, underscores, and dollar signs (same rules as variables).
+
+The parentheses may include parameter names separated by commas:
+**(\*parameter1, parameter2, ...\*)**
+
+The code to be executed, by the function, is placed inside curly brackets: **{}**
+
+````javascript
+function name(parameter1, parameter2, parameter3) {
+  // code to be executed
+}
+````
+
+Function **parameters** are listed inside the parentheses () in the function definition.
+
+Function **arguments** are the **values** received by the function when it is invoked.
+
+Inside the function, the arguments (the parameters) behave as local variables.
+
+The code inside the function will execute when "something" **invokes** (calls) the function:
+
+- When an event occurs (when a user clicks a button)
+- When it is invoked (called) from JavaScript code
+- Automatically (self invoked)
+
+When JavaScript reaches a `return` statement, the function will stop executing.
+
+If the function was invoked from a statement, JavaScript will "return" to execute the code after the invoking statement.
+
+Functions often compute a **return value**. The return value is "returned" back to the "caller"
+
+````javascript
+let x = myFunction(4, 3);   // Function is called, return value will end up in x
+
+function myFunction(a, b) {
+  return a * b;             // Function returns the product of a and b
+} //value of x = 12
+````
+
+With functions you can reuse code: Define the code once, and use it many times.
+
+You can use the same code many times with different arguments, to produce different results.
+
+Accessing a function without () will return the function object instead of the function result.
+
+Functions can be used the same way as you use variables, in all types of formulas, assignments, and calculations.
+
+````javascript
+//Instead of using a variable to store the return value of a function:
+let x = toCelsius(77);
+let text = "The temperature is " + x + " Celsius";
+//You can use the function directly, as a variable value:
+let text = "The temperature is " + toCelsius(77) + " Celsius";
+````
+
+Variables declared within a JavaScript function, become **LOCAL** to the function.
+
+Local variables can only be accessed from within the function.
+
+````javascript
+// code here can NOT use carName
+
+function myFunction() {
+  let carName = "Volvo";
+  // code here CAN use carName
+}
+
+// code here can NOT use carName
+````
+
+Since local variables are only recognized inside their functions, variables with the same name can be used in different functions.
+
+Local variables are created when a function starts, and deleted when the function is completed.
+
+While the function declaration above is syntactically a statement, functions can also be created by a function expression
+
+Such a function can be **anonymous**; it does not have to have a name. For example, the function `square` could have been defined as:
+
+Such a function can be **anonymous**; it does not have to have a name. For example, the function `square` could have been defined as:
+
+````javascript
+const square = function(number) { return number * number }
+var x = square(4) // x gets the value 16
+````
+
+However, a name *can* be provided with a function expression. Providing a name allows the function to refer to itself, and also makes it easier to identify the function in a debugger's stack traces:
+
+````javascript
+const factorial = function fac(n) { return n < 2 ? 1 : n * fac(n - 1) }
+console.log(factorial(3))
+````
+
+Function expressions are convenient when passing a function as an argument to another function. The following example shows a `map` function that should receive a function as first argument and an array as second argument:
+
+````javascript
+function map(f, a) {
+  let result = []; // Create a new Array
+  let i; // Declare variable
+  for (i = 0; i != a.length; i++)
+    result[i] = f(a[i]);
+  return result;
+}
+````
+
+In the following code, the function receives a function defined by a function expression and executes it for every element of the array received as a second argument:
+
+````javascript
+function map(f, a) {
+  let result = []; // Create a new Array
+  let i; // Declare variable
+  for (i = 0; i != a.length; i++)
+    result[i] = f(a[i]);
+  return result;
+}
+const f = function(x) {
+   return x * x * x;
+}
+let numbers = [0, 1, 2, 5, 10];
+let cube = map(f,numbers);
+console.log(cube); //Function returns: [0, 1, 8, 125, 1000].
+````
+
+In JavaScript, a function can be defined based on a condition. For example, the following function definition defines `myFunc` only if `num` equals `0`:
+
+````javascript
+var myFunc;
+if (num === 0) {
+  myFunc = function(theObject) {
+    theObject.make = 'Toyota';
+  }
+}
+````
+
+In addition to defining functions as described here, you can also use the [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function) constructor to create functions from a string at runtime, much like [`eval()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval).
+
+A **method** is a function that is a property of an object. 
+
+*Defining* a function does not *execute* it. Defining it names the function and specifies what to do when the function is called.
+
+**Calling** the function actually performs the specified actions with the indicated parameters. For example, if you define the function `square`, you could call it as follows:
+
+````javascript
+square(5); //The preceding statement calls the function with an argument of 5. The function executes its statements and returns the value 25
+````
+
+Functions must be *in scope* when they are called, but the function declaration can be hoisted (appear below the call in the code), as in this example:
+
+````javascript
+console.log(square(5));
+/* ... */
+function square(n) { return n * n }
+````
+
+The arguments of a function are not limited to strings and numbers. You can pass whole objects to a function.
+
+There are other ways to call functions. There are often cases where a function needs to be called dynamically, or the number of arguments to a function vary, or in which the context of the function call needs to be set to a specific object determined at runtime.
+
+It turns out that *functions are themselves objects*—and in turn, these objects have methods.
+
+Every JavaScript function is actually a `Function` object. This can be seen with the code `(function(){}).constructor === Function`, which returns true.
+
+Constructor
+
+- [`Function()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function)
+
+  Creates a new `Function` object. Calling the constructor directly can create functions dynamically but suffers from security and similar (but far less significant) performance issues to [`Global_Objects/eval`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval). However, unlike eval, the `Function` constructor creates functions that execute in the global scope only.
+
+Instance properties
+
+- [`Function.prototype.arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/arguments)
+
+  An array corresponding to the arguments passed to a function. This is deprecated as a property of [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function). Use the [`arguments`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments) object (available within the function) instead.
+
+- [`Function.prototype.caller`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller)
+
+  Specifies the function that invoked the currently executing function. This property is deprecated, and is only functional for some non-strict functions.
+
+- [`Function.prototype.displayName`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/displayName)
+
+  The display name of the function.
+
+- [`Function.prototype.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length)
+
+  Specifies the number of arguments expected by the function.
+
+- [`Function.prototype.name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name)
+
+  The name of the function.
+
+Instance methods
+
+- `Function.prototype.apply(thisArg [, argsArray\])`
+
+  Calls a function and sets its `this` to the provided `thisArg`. Arguments can be passed as an [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) object.
+
+- `Function.prototype.bind(thisArg[, arg1[, arg2[, ...argN\]]])`
+
+  Creates a new function which, when called, has its `this` set to the provided `thisArg`. Optionally, a given sequence of arguments will be prepended to arguments provided the newly-bound function is called.
+
+- `Function.prototype.call(thisArg[, arg1, arg2, ...argN\])`
+
+  Calls a function and sets its `this` to the provided value. Arguments can be passed as they are.
+
+- `Function.prototype.toString()`
+
+  Returns a string representing the source code of the function. Overrides the [`Object.prototype.toString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString) method.
+
+Difference between Function constructor and function declaration
+
+Functions created with the `Function` constructor do not create closures to their creation contexts; they always are created in the global scope. When running them, they will only be able to access their own local variables and global ones, not the ones from the scope in which the `Function` constructor was created. This is different from using [`Global_Objects/eval`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) with code for a function expression.
+
+```javascript
+let x = 10;
+
+function createFunction1() {
+    let x = 20;
+    return new Function('return x;'); // this |x| refers global |x|
+}
+
+function createFunction2() {
+    let x = 20;
+    function f() {
+        return x; // this |x| refers local |x| above
+    }
+    return f;
+}
+
+let f1 = createFunction1();
+console.log(f1());          // 10
+let f2 = createFunction2();
+console.log(f2());          // 20
+```
+
+While this code works in web browsers, `f1()` will produce a `ReferenceError` in Node.js, as `x` will not be found. This is because the top-level scope in Node is not the global scope, and `x` will be local to the module.
+
+## JavaScript Recursive Functions
+
+A recursive function is a [function](https://www.javascripttutorial.net/javascript-function/) that calls itself until it doesn’t. And this technique is called recursion.
+
+Suppose that you have a function called `recurse()`. The `recurse()` is a recursive function if it calls itself inside its body, like this:
+
+```javascript
+function recurse() {
+    // ...
+    recurse();
+    // ...
+}
+```
+
+A recursive function always has a condition to stop calling itself. Otherwise, it will call itself indefinitely. So a recursive function typically looks like the following:
+
+```javascript
+function recurse() {
+    if(condition) {
+        // stop calling itself
+        //...
+    } else {
+        recurse();
+    }
+}
+```
+
+Generally, you use recursive functions to break down a big problem into smaller ones. Typically, you will find the recursive functions in data structures like binary trees and graphs and algorithms such as binary search and quicksort.
+
+The following shows the `countDown()` function:
+
+```javascript
+function countDown(fromNumber) {
+    console.log(fromNumber);
+}
+countDown(3);
+```
+
+This `countDown(3)` shows only the number 3.
+
+To count down from the number 3 to 1, you can:
+
+1. show the number 3.
+2. and call the `countDown(2)` that shows the number 2.
+3. and call the `countDown(1)` that shows the number 1.
+
+The following changes the `countDown()` to a recursive function:
+
+```javascript
+function countDown(fromNumber) {
+    console.log(fromNumber);
+    countDown(fromNumber-1);
+}
+countDown(3);
+```
+
+This `countDown(3)` will run until the call stack size is exceeded, like this:
+
+```javascript
+Uncaught RangeError: Maximum call stack size exceeded.
+```
+
+… because it doesn’t have the condition to stop calling itself.
+
+The count down will stop when the next number is zero. Therefore, we add an [if condition](https://www.javascripttutorial.net/javascript-if-else/) as follows:
+
+```javascript
+function countDown(fromNumber) {
+    console.log(fromNumber);
+
+    let nextNumber = fromNumber - 1;
+
+    if (nextNumber > 0) {
+        countDown(nextNumber);
+    }
+}
+countDown(3);Code language: JavaScript (javascript)
+/*
+3
+2
+1
+*/
+```
+
+The `countDown()` seems to work as expected.
+
+However the function’s name is a reference to the actual function object.
+
+If the function name is set to null somewhere in the code, the recursive function will stop working.
+
+For example, the following code will result in an error:
+
+```javascript
+let newYearCountDown = countDown;
+// somewhere in the code
+countDown = null;
+// the following function call will cause an error
+newYearCountDown(10);
+//error: Uncaught TypeError: countDown is not a function
+```
+
+How the script works:
+
+- First, assign the `countDown` function name to the variable `newYearCountDown`.
+- Second, set the `countDown` function reference to `null`.
+- Third, call the `newYearCountDown` function.
+
+The code causes an error because the body of the `countDown()` function references the `countDown` function name, which was set to `null` at the time of calling the function.
+
+To fix it, you can use a named function expression as follows:
+
+```javascript
+let countDown = function f(fromNumber) {
+    console.log(fromNumber);
+
+    let nextNumber = fromNumber - 1;
+
+    if (nextNumber > 0) {
+        f(nextNumber);
+    }
+}
+
+let newYearCountDown = countDown;
+countDown = null;
+newYearCountDown(10);
+```
+
+Given a number e.g., 324, calculate the sum of digits 3 + 2 + 4 = 9.
+
+To apply the recursive technique, you can use the following steps:
+
+```javascript
+f(324) = 4 + f(32)
+f(32)  = 2 + f(3)
+f(3)   = 3  + 0 (stop here)
+```
+
+So
+
+```javascript
+f(324) = 4 + f(32) 
+f(324) = 4 + 2 + f(3) 
+f(324) = 4 + 2 + 3 
+```
+
+The following illustrates the `sumOfDigits()` recursive function:
+
+```javascript
+function sumOfDigits(num) {
+    if (num == 0) {
+        return 0;
+    }
+    return num % 10 + sumOfDigits(Math.floor(num / 10));
+}Code language: JavaScript (javascript)
+```
+
+How it works:
+
+- The `num%10` returns the remainder of the number after divided by 10, e.g., `324 % 10 = 4`
+- The `Math.floor(num / 10)` returns the whole part of the `num / 10` e.g., `Math.floor(324 / 10) = 32`
+- The `if(num == 0)` is a condition that stops calling the function.
+
+Why Do I Need To Know Recursion? --- I like to watch people suffer lol jk.
+
+
+
