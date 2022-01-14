@@ -1329,64 +1329,6 @@ console.log(jsCreator[-1]); //output: undefined
 console.log(jsCreator[42]); //output: undefined
 ````
 
-## JavaScript Strings as Objects
-
-Normally, JavaScript strings are primitive values, created from literals
-
-But strings can also be defined as objects with the keyword `new`:
-
-An **object** is a collection of related data and operations. An operation that can be carried out on an object is known as a **method**. A piece of data associated with an object is known as a **property**.
-
-````javascript
-let y = new String("John");
-````
-
-Do not create Strings objects.
-
-The `new` keyword complicates the code and slows down execution speed.
-
-String objects can produce unexpected results:
-
-````javascript
-let x = "John";
-let y = new String("John");
-console.log(x == y); //console: true
-console.log(x === y); //console: false
-````
-
-Comparing two JavaScript objects **always** returns **false**.
-
-Javascript String is immutable, which means once a String object is assigned to String reference the object value cannot be changed. However, we can still assign a new object to a String reference
-
-````javascript
-let myStr = "Hello World";
-myVar.toUpperCase();
-````
-
-One may think after the first line the *myVar* will become “HELLO WORLD”, but it still equals to “Hello World”. The method will return a new String object it will not change the existing String reference. So we have to assign it to a new variable to get the desired value.
-
-````javascript
-let myStrUpperCase = myStr.toUpperCase();
-````
-
-It may seem that once a String reference is assigned to a String object it cannot be reused as we can't change the value but we can assign existing String reference a new String object altogether.
-
-````javascript
-let str = "Hello World";
-str = "Hello World!!!!"; //new String reference assigned
-//this will assign return new String reference to myVar object.
-str = str.toUpperCase();
-````
-
-*Note*: We also cannot assign a new character to an index in String by square bracket notation. As Strings are immutable, by doing that we will be updating the content of String reference which cannot be possible in case of immutability.
-
-````javascript
-let myStr = "Hello";
-myVar[0] = "i";//still myVar remains same
-````
-
-String object has many methods which deal with string characters and all of them returns a new String object instead of modifying the String object on which they are called.
-
 ## JavaScript Arrays
 
 An array is a special variable, which can hold more than one value:
@@ -1591,8 +1533,6 @@ for (*statement 1*; *statement 2*; *statement 3*) {
  // *code block to be executed*
 }
 ````
-
-
 
 **Statement 1** is executed (one time) before the execution of the code block.
 
@@ -2211,6 +2151,246 @@ for (let x of keys) {
 }
 ````
 
+## JavaScript Objects
+
+A Pokémon is an **object**.
+
+A Pokémon has **properties** like name and type, and **methods** like usemoves and outofpokeball:
+
+| Object                                                       | Properties                                                   | Methods                                                      |
+| :----------------------------------------------------------- | ------------------------------------------------------------ | :----------------------------------------------------------- |
+| ![image-20220104121535601](C:\Users\Heather\AppData\Roaming\Typora\typora-user-images\image-20220104121535601.png) | pokemon.name = Togepi  pokemon.type = Normal  pokemon.id = 175  pokemon.generation = II | pokemon.outofpokeball()  pokemon.caught()  pokemon.intopokeball()  pokemon.usemoves() |
+
+All Pokémon have the same **properties**, but the property **values** differ from Pokémon to Pokémon.
+
+All Pokémon have the same **methods**, but the methods are performed **at different times**.
+
+JavaScript variables are containers for data values.
+
+````javascript
+let pokemon = "Togepi";
+````
+
+Objects are variables too. But objects can contain many values.
+
+This code assigns **many values** (Togepi, Normal, 175) to a **variable** named pokemon:
+
+````javascript
+const pokemon = {pokemon.name: "Togepi",  pokemon.type: "Normal",  pokemon.id: 175  pokemon.generation: "II"};
+````
+
+The values are written as **name:value** pairs (name and value separated by a colon).
+
+It is a common practice to declare objects with the const keyword.
+
+You define (and create) a JavaScript object with an object literal:
+
+````javascript
+const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+````
+
+Spaces and line breaks are not important. An object definition can span multiple lines:
+
+````javascript
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+````
+
+The **name:values** pairs in JavaScript objects are called **properties**:
+
+| Property  | Property Value |
+| :-------- | :------------- |
+| firstName | John           |
+| lastName  | Doe            |
+| age       | 50             |
+| eyeColor  | blue           |
+
+You can access object properties in two ways:
+
+````javascript
+objectName.propertyName
+//or
+objectName["propertyName"]
+````
+
+JavaScript objects are containers for **named values** called properties.
+
+Objects can also have **methods**.
+
+Methods are **actions** that can be performed on objects.
+
+Methods are stored in properties as **function definitions**.
+
+| Property  | Property Value                                            |
+| :-------- | :-------------------------------------------------------- |
+| firstName | John                                                      |
+| lastName  | Doe                                                       |
+| age       | 50                                                        |
+| eyeColor  | blue                                                      |
+| fullName  | function() {return this.firstName + " " + this.lastName;} |
+
+A method is a function stored as a property.
+
+````javascript
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+````
+
+In a function definition, `this` refers to the "owner" of the function.
+
+In the example above, `this` is the **person object** that "owns" the `fullName` function.
+
+In other words, `this.firstName` means the `firstName` property of **this object**.
+
+You access an object method with the following syntax:
+
+````javascript
+//objectName.methodName()
+//Example
+const name = person.fullName(); 
+````
+
+If you access a method **without** the () parentheses, it will return the **function definition**:
+
+````javascript
+const name = person.fullName;
+````
+
+When a JavaScript variable is declared with the keyword "`new`", the variable is created as an object:
+
+````javascript
+x = new String();        // Declares x as a String object
+y = new Number();        // Declares y as a Number object
+z = new Boolean();       // Declares z as a Boolean object
+````
+
+Avoid `String`, `Number`, and `Boolean` objects. They complicate your code and slow down execution speed.
+
+## JavaScript Strings as Objects
+
+Normally, JavaScript strings are primitive values, created from literals
+
+But strings can also be defined as objects with the keyword `new`:
+
+An **object** is a collection of related data and operations. An operation that can be carried out on an object is known as a **method**. A piece of data associated with an object is known as a **property**.
+
+````javascript
+let y = new String("John");
+````
+
+Do not create Strings objects.
+
+The `new` keyword complicates the code and slows down execution speed.
+
+String objects can produce unexpected results:
+
+````javascript
+let x = "John";
+let y = new String("John");
+console.log(x == y); //console: true
+console.log(x === y); //console: false
+````
+
+Comparing two JavaScript objects **always** returns **false**.
+
+Javascript String is immutable, which means once a String object is assigned to String reference the object value cannot be changed. However, we can still assign a new object to a String reference
+
+````javascript
+let myStr = "Hello World";
+myVar.toUpperCase();
+````
+
+One may think after the first line the *myVar* will become “HELLO WORLD”, but it still equals to “Hello World”. The method will return a new String object it will not change the existing String reference. So we have to assign it to a new variable to get the desired value.
+
+````javascript
+let myStrUpperCase = myStr.toUpperCase();
+````
+
+It may seem that once a String reference is assigned to a String object it cannot be reused as we can't change the value but we can assign existing String reference a new String object altogether.
+
+````javascript
+let str = "Hello World";
+str = "Hello World!!!!"; //new String reference assigned
+//this will assign return new String reference to myVar object.
+str = str.toUpperCase();
+````
+
+*Note*: We also cannot assign a new character to an index in String by square bracket notation. As Strings are immutable, by doing that we will be updating the content of String reference which cannot be possible in case of immutability.
+
+````javascript
+let myStr = "Hello";
+myVar[0] = "i";//still myVar remains same
+````
+
+String object has many methods which deal with string characters and all of them returns a new String object instead of modifying the String object on which they are called.
+
+## JavaScript Math Object
+
+The JavaScript Math object allows you to perform mathematical tasks on numbers.
+
+Unlike other objects, the Math object has no constructor.
+
+The Math object is static.
+
+All methods and properties can be used without creating a Math object first.
+
+The syntax for any Math property is : `Math.*property*`.
+
+JavaScript provides 8 mathematical constants that can be accessed as Math properties:
+
+````javascript
+Math.E        // returns Euler's number
+Math.PI       // returns PI
+Math.SQRT2    // returns the square root of 2
+Math.SQRT1_2  // returns the square root of 1/2
+Math.LN2      // returns the natural logarithm of 2
+Math.LN10     // returns the natural logarithm of 10
+Math.LOG2E    // returns base 2 logarithm of E
+Math.LOG10E   // returns base 10 logarithm of E
+````
+
+The syntax for Math any methods is : `Math.*method*(*number*)`
+
+| Method                                                       | Description                                                  |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [abs(x)](https://www.w3schools.com/jsref/jsref_abs.asp)      | Returns the absolute value of x                              |
+| [acos(x)](https://www.w3schools.com/jsref/jsref_acos.asp)    | Returns the arccosine of x, in radians                       |
+| [acosh(x)](https://www.w3schools.com/jsref/jsref_acosh.asp)  | Returns the hyperbolic arccosine of x                        |
+| [asin(x)](https://www.w3schools.com/jsref/jsref_asin.asp)    | Returns the arcsine of x, in radians                         |
+| [asinh(x)](https://www.w3schools.com/jsref/jsref_asinh.asp)  | Returns the hyperbolic arcsine of x                          |
+| [atan(x)](https://www.w3schools.com/jsref/jsref_atan.asp)    | Returns the arctangent of x as a numeric value between -PI/2 and PI/2 radians |
+| [atan2(y, x)](https://www.w3schools.com/jsref/jsref_atan2.asp) | Returns the arctangent of the quotient of its arguments      |
+| [atanh(x)](https://www.w3schools.com/jsref/jsref_atanh.asp)  | Returns the hyperbolic arctangent of x                       |
+| [cbrt(x)](https://www.w3schools.com/jsref/jsref_cbrt.asp)    | Returns the cubic root of x                                  |
+| [ceil(x)](https://www.w3schools.com/jsref/jsref_ceil.asp)    | Returns x, rounded upwards to the nearest integer            |
+| [cos(x)](https://www.w3schools.com/jsref/jsref_cos.asp)      | Returns the cosine of x (x is in radians)                    |
+| [cosh(x)](https://www.w3schools.com/jsref/jsref_cosh.asp)    | Returns the hyperbolic cosine of x                           |
+| [exp(x)](https://www.w3schools.com/jsref/jsref_exp.asp)      | Returns the value of Ex                                      |
+| [floor(x)](https://www.w3schools.com/jsref/jsref_floor.asp)  | Returns x, rounded downwards to the nearest integer          |
+| [log(x)](https://www.w3schools.com/jsref/jsref_log.asp)      | Returns the natural logarithm (base E) of x                  |
+| [max(x, y, z, ..., n)](https://www.w3schools.com/jsref/jsref_max.asp) | Returns the number with the highest value                    |
+| [min(x, y, z, ..., n)](https://www.w3schools.com/jsref/jsref_min.asp) | Returns the number with the lowest value                     |
+| [pow(x, y)](https://www.w3schools.com/jsref/jsref_pow.asp)   | Returns the value of x to the power of y                     |
+| [random()](https://www.w3schools.com/jsref/jsref_random.asp) | Returns a random number between 0 and 1                      |
+| [round(x)](https://www.w3schools.com/jsref/jsref_round.asp)  | Rounds x to the nearest integer                              |
+| [sign(x)](https://www.w3schools.com/jsref/jsref_sign.asp)    | Returns if x is negative, null or positive (-1, 0, 1)        |
+| [sin(x)](https://www.w3schools.com/jsref/jsref_sin.asp)      | Returns the sine of x (x is in radians)                      |
+| [sinh(x)](https://www.w3schools.com/jsref/jsref_sinh.asp)    | Returns the hyperbolic sine of x                             |
+| [sqrt(x)](https://www.w3schools.com/jsref/jsref_sqrt.asp)    | Returns the square root of x                                 |
+| [tan(x)](https://www.w3schools.com/jsref/jsref_tan.asp)      | Returns the tangent of an angle                              |
+| [tanh(x)](https://www.w3schools.com/jsref/jsref_tanh.asp)    | Returns the hyperbolic tangent of a number                   |
+| [trunc(x)](https://www.w3schools.com/jsref/jsref_trunc.asp)  | Returns the integer part of a number (x)                     |
+
 ## JavaScript Functions
 
 A JavaScript function is a block of code designed to perform a particular task.
@@ -2460,6 +2640,318 @@ console.log(f2());          // 20
 
 While this code works in web browsers, `f1()` will produce a `ReferenceError` in Node.js, as `x` will not be found. This is because the top-level scope in Node is not the global scope, and `x` will be local to the module.
 
+## JavaScript Scope
+
+Scope is the accessibility of variables, functions, and objects in some particular part of your code during runtime. In other words, scope determines the visibility of variables and other resources in areas of your code.
+
+Understanding `scope` will make your code stand out, reduce errors and help you make powerful design patterns with it.
+
+In the JavaScript language there are two types of scopes:
+
+- Global Scope
+- Local Scope
+
+Variables defined **inside a function** are in local scope while variables defined outside of a function are in the global scope. Each function when invoked creates a new scope.
+
+When you start writing JavaScript in a document, you are already in the Global scope. There is only one Global scope throughout a JavaScript document. A variable is in the Global scope if it’s defined outside of a function.
+
+````javascript
+// the scope is by default global
+let name = 'Link';
+````
+
+Variables inside the Global scope can be accessed and altered in any other scope.
+
+````javascript
+let name = 'Link';
+
+console.log(name); // logs 'Link'
+
+function logName() {
+    console.log(name); // 'name' is accessible here and everywhere else
+}
+
+logName(); // logs 'Link'
+````
+
+Variables defined inside a function are in the local scope. And they have a different scope for every call of that function. This means that variables having the same name can be used in different functions. This is because those variables are bound to their respective functions, each having different scopes, and are not accessible in other functions.
+
+````javascript
+// Global Scope
+function someFunction() {
+    // Local Scope #1
+    function someOtherFunction() {
+        // Local Scope #2
+    }
+}
+
+// Global Scope
+function anotherFunction() {
+    // Local Scope #3
+}
+// Global Scope
+````
+
+Block statements like `if` and `switch` conditions or `for` and `while` loops, unlike functions, don’t create a new scope. Variables defined inside of a block statement will remain in the scope they were already in.
+
+```javascript
+if (true) {
+    // this 'if' conditional block doesn't create a new scope
+    let name = 'Link'; // name is still in the global scope
+}
+
+console.log(name); // logs 'Link'
+```
+
+Global scope lives as long as your application lives. Local Scope lives as long as your functions are called and executed.
+
+Lexical Scope means that in a nested group of functions, the inner functions have access to the variables and other resources of their parent scope. This means that the child functions are lexically bound to the execution context of their parents. Lexical scope is sometimes also referred to as Static Scope.
+
+````javascript
+function grandfather() {
+    var name = 'Link';
+    // likes is not accessible here
+    function parent() {
+        // name is accessible here
+        // likes is not accessible here
+        function child() {
+            // Innermost level of the scope chain
+            // name is also accessible here
+            var likes = 'Rupees';
+        }
+    }
+}
+````
+
+The thing you will notice about lexical scope is that it works forward, meaning `name` can be accessed by its children’s execution contexts. But it doesn’t work backward to its parents, meaning that the variable `likes` cannot be accessed by its parents. This also tells us that variables having the same name in different execution contexts gain precedence from top to bottom of the execution stack. A variable, having a name similar to another variable, in the innermost function (topmost context of the execution stack) will have higher precedence.
+
+The concept of closures is closely related to Lexical Scope, which we studied above. A Closure is created when an inner function tries to access the scope chain of its outer function meaning the variables outside of the immediate lexical scope. Closures contain their own scope chain, the scope chain of their parents, and the global scope.
+
+A closure can not only access the variables defined in its outer function but also the arguments of the outer function.
+
+A closure can also access the variables of its outer function even after the function has returned. This allows the returned function to maintain access to all the resources of the outer function.
+
+When you return an inner function from a function, that returned function will not be called when you try to call the outer function. You must first save the invocation of the outer function in a separate variable and then call the variable as a function. Consider this example:
+
+````javascript
+function sayHi() {
+    name = 'Link';
+    return function () {
+        console.log('Hi ' + name);
+    }
+}
+
+sayHi(); // nothing happens, no errors
+
+// the returned function from sayHi() gets saved in greetPerson
+greetPerson = sayHi();
+
+ // calling greetPerson calls the returned function from the sayHi() function
+greetPerson(); // logs 'Hi Link'
+````
+
+The key thing to note here is the `greetPerson` function can access the name variable of the `greet` function even after it has been returned. One way to call the returned function from the `sayHi` function without variable assignment is by using parentheses `()` two times `()()` like this:
+
+````javascript
+function sayHi() {
+    name = 'Link';
+    return function () {
+        console.log('Hi ' + name);
+    }
+}
+
+sayHi()(); // logs 'Hi Link'
+````
+
+## The JavaScript *this* Keyword
+
+````javascript
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+````
+
+The JavaScript `this` keyword refers to the object it belongs to.
+
+It has different values depending on where it is used:
+
+- In a method, `this` refers to the **owner object**.
+- Alone, `this` refers to the **global object**.
+- In a function, `this` refers to the **global object**.
+- In a function, in strict mode, `this` is `undefined`.
+- In an event, `this` refers to the **element** that received the event.
+- Methods like `call()`, and `apply()` can refer `this` to **any object**.
+
+In an object method, `this` refers to the "**owner**" of the method.
+
+In the example on the top of this page, `this` refers to the **person** object.
+
+The **person** object is the **owner** of the **fullName** method.
+
+````javascript
+fullName : function() {
+  return this.firstName + " " + this.lastName;
+}
+````
+
+When used alone, the **owner** is the Global object, so `this` refers to the Global object.
+
+In a browser window the Global object is `[object Window]`:
+
+````javascript
+let x = this;
+````
+
+In **strict mode**, when used alone, `this` also refers to the Global object `[object Window]`:
+
+````javascript
+"use strict";
+let x = this;
+````
+
+In a JavaScript function, the owner of the function is the **default** binding for `this`.
+
+So, in a function, `this` refers to the Global object `[object Window]`.
+
+````javascript
+function myFunction() {
+  return this;
+}
+````
+
+JavaScript **strict mode** does not allow default binding.
+
+So, when used in a function, in strict mode, `this` is `undefined`.
+
+````javascript
+"use strict";
+function myFunction() {
+  return this;
+}
+````
+
+In these examples, `this` is the **person** object (The person object is the "owner" of the function):
+
+````javascript
+const person = {
+  firstName  : "John",
+  lastName   : "Doe",
+  id         : 5566,
+  myFunction : function() {
+    return this;
+  }
+};
+````
+
+In other words: **this.firstName** means the **firstName** property of **this** (person) object.
+
+## Explicit Function Binding
+
+The `call()` and `apply()` methods are predefined JavaScript methods.
+
+They can both be used to call an object method with another object as argument.
+
+You can read more about `call()` and `apply()` later in this tutorial.
+
+In the example below, when calling person1.fullName with person2 as argument, `this` will refer to person2, even if it is a method of person1:
+
+````javascript
+const person1 = {
+ fullName: function() {
+  return this.firstName + " " + this.lastName;
+ }
+}
+const person2 = {
+ firstName:"John",
+ lastName: "Doe",
+}
+person1.fullName.call(person2); // Will return "John Doe"
+````
+
+## JavaScript Arrow Function
+
+Arrow functions allow us to write shorter function syntax:
+
+````javascript
+//javascript function
+hello = function() {
+  return "Stardew Valley";
+}
+//javascript arrow function
+hello = () => {
+  return "Stardew Valley";
+}
+````
+
+If the function has only one statement, and the statement returns a value, you can remove the brackets *and* the `return` keyword:
+
+````javascript
+hello = () => "Stardew Valley";
+//Note: This works only if the function has only one statement.
+````
+
+If you have parameters, you pass them inside the parentheses:
+
+````javascript
+hello = val => "Hello " + val;
+````
+
+An **arrow function expression** is a compact alternative to a traditional [function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function), but is limited and can't be used in all situations. Arrow function expressions are best suited for non-method functions. 
+
+**Differences & Limitations:**
+
+- Does not have its own bindings to [`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) or [`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super), and should not be used as [`methods`](https://developer.mozilla.org/en-US/docs/Glossary/Method).
+- Does not have [`new.target`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new.target) keyword.
+- Not suitable for [`call`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call), [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) and [`bind`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) methods, which generally rely on establishing a [scope](https://developer.mozilla.org/en-US/docs/Glossary/Scope).
+- Can not be used as [constructors](https://developer.mozilla.org/en-US/docs/Glossary/Constructor).
+- Can not use [`yield`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/yield), within its body.
+
+Let's see what happens when we try to use them as methods:
+
+````javascript
+'use strict';
+
+var obj = { // does not create a new scope
+  i: 10,
+  b: () => console.log(this.i, this),
+  c: function() {
+    console.log(this.i, this);
+  }
+}
+
+obj.b(); // prints undefined, Window {...} (or the global object)
+obj.c(); // prints 10, Object {...}
+````
+
+
+
+The handling of `this` is different in arrow functions compared to regular functions.
+
+In short, with arrow functions there are no binding of `this`.
+
+In regular functions the `this` keyword represented the object that called the function, which could be the window, the document, a button or whatever.
+
+With arrow functions the `this` keyword *always* represents the object that defined the arrow function.
+
+Perhaps the greatest benefit of using Arrow functions is with DOM-level methods (setTimeout, setInterval, addEventListener) that usually required some kind of closure, call, apply or bind to ensure the function executed in the proper scope.
+
+Arrow functions can have either a "concise body" or the usual "block body".
+
+In a concise body, only an expression is specified, which becomes the implicit return value. In a block body, you must use an explicit `return` statement.
+
+````javascript
+var func = x => x * x;
+// concise body syntax, implied "return"
+
+var func = (x, y) => { return x + y; };
+// with block body, explicit "return" needed
+````
+
 ## JavaScript Recursive Functions
 
 A recursive function is a [function](https://www.javascripttutorial.net/javascript-function/) that calls itself until it doesn’t. And this technique is called recursion.
@@ -2624,5 +3116,200 @@ How it works:
 
 Why Do I Need To Know Recursion? --- I like to watch people suffer lol jk.
 
+## JavaScript Modules
 
+As our application grows bigger, we want to split it into multiple files, so called “modules”. A module may contain a class or a library of functions for a specific purpose.
+
+For a long time, JavaScript existed without a language-level module syntax. That wasn’t a problem, because initially scripts were small and simple, so there was no need.
+
+But eventually scripts became more and more complex, so the community invented a variety of ways to organize code into modules, special libraries to load modules on demand.
+
+The language-level module system appeared in the standard in 2015, gradually evolved since then, and is now supported by all major browsers and in Node.js. So we’ll study the modern JavaScript modules from now on.
+
+A module is just a file. One script is one module. As simple as that.
+
+Modules can load each other and use special directives `export` and `import` to interchange functionality, call functions of one module from another one:
+
+- `export` keyword labels variables and functions that should be accessible from outside the current module.
+- `import` allows the import of functionality from other modules.
+
+For instance, if we have a file `sayHi.js` exporting a function:
+
+```javascript
+// 📁 sayHi.js
+export function sayHi(user) {
+  alert(`Hello, ${user}!`);
+}
+```
+
+…Then another file may import and use it:
+
+```javascript
+// 📁 main.js
+import {sayHi} from './sayHi.js';
+
+alert(sayHi); // function...
+sayHi('Link'); // Hello, Link!
+```
+
+The `import` directive loads the module by path `./sayHi.js` relative to the current file, and assigns exported function `sayHi` to the corresponding variable.
+
+As modules support special keywords and features, we must tell the browser that a script should be treated as a module, by using the attribute `<script type="module">`.
+
+```html
+<!doctype html>
+<script type="module">
+  import {sayHi} from './say.js';
+
+  document.body.innerHTML = sayHi('Link');
+</script>
+```
+
+The browser automatically fetches and evaluates the imported module (and its imports if needed), and then runs the script.
+
+**Modules work only via HTTP(s), not locally**
+
+If you try to open a web-page locally, via `file://` protocol, you’ll find that `import/export` directives don’t work. Use a local web-server, such as [static-server](https://www.npmjs.com/package/static-server#getting-started) or use the “live server” capability of your editor, such as VS Code [Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) to test modules.
+
+Core module features
+
+What’s different in modules, compared to “regular” scripts?
+
+There are core features, valid both for browser and server-side JavaScript.
+
+Always “use strict”
+
+Modules always work in strict mode. E.g. assigning to an undeclared variable will give an error.
+
+```html
+<script type="module">
+  a = 5; // error
+</script>
+```
+
+Module-level scope
+
+Each module has its own top-level scope. In other words, top-level variables and functions from a module are not seen in other scripts.
+
+In the example below, two scripts are imported, and `hello.js` tries to use `user` variable declared in `user.js`. It fails, because it’s a separate module (you’ll see the error in the console):
+
+```html
+<!doctype html>
+<script type="module" src="user.js"></script>
+<script type="module" src="hello.js"></script>
+```
+
+Modules should `export` what they want to be accessible from outside and `import` what they need.
+
+- `user.js` should export the `user` variable.
+- `hello.js` should import it from `user.js` module.
+
+In other words, with modules we use import/export instead of relying on global variables.
+
+This is the correct variant:
+
+```javascript
+import {user} from './user.js';
+
+document.body.innerHTML = user; // Link
+```
+
+In the browser, if we talk about HTML pages, independent top-level scope also exists for each `<script type="module">`.
+
+Here are two scripts on the same page, both `type="module"`. They don’t see each other’s top-level variables:
+
+```html
+<script type="module">
+  // The variable is only visible in this module script
+  let user = "Link";
+</script>
+
+<script type="module">
+  alert(user); // Error: user is not defined
+</script>
+```
+
+**Please note:**
+
+In the browser, we can make a variable window-level global by explicitly assigning it to a `window` property, e.g. `window.user = "Link"`.
+
+Then all scripts will see it, both with `type="module"` and without it.
+
+That said, making such global variables is frowned upon. Please try to avoid them.
+
+A module code is evaluated only the first time when imported
+
+If the same module is imported into multiple other modules, its code is executed only once, upon the first import. Then its exports are given to all further importers.
+
+The one-time evaluation has important consequences, that we should be aware of.
+
+First, if executing a module code brings side-effects, like showing a message, then importing it multiple times will trigger it only once – the first time:
+
+```javascript
+// 📁 alert.js
+alert("Module is evaluated!");
+// Import the same module from different files
+
+// 📁 1.js
+import `./alert.js`; // Module is evaluated!
+
+// 📁 2.js
+import `./alert.js`; // (shows nothing)
+```
+
+The second import shows nothing, because the module has already been evaluated.
+
+There’s a rule: top-level module code should be used for initialization, creation of module-specific internal data structures. If we need to make something callable multiple times – we should export it as a function, like we did with `sayHi` above.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HTML
+
+In HTML event handlers, `this` refers to the HTML element that received the event:
+
+````javascript
+<button onclick="this.style.display='none'">
+  Click to Remove Me!
+</button>
+````
+
+
+
+
+
+
+
+
+
+
+
+Sources: (possibly not complete)
+
+https://javascript.info
+
+https://www.w3schools.com/
+
+https://developer.mozilla.org/
+
+https://www.freecodecamp.org/
+
+https://stackoverflow.com/
+
+https://dorey.github.io/JavaScript-Equality-Table/
 
